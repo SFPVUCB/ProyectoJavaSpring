@@ -2,6 +2,8 @@ package com.platzi.platzi.market.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="clientes")
 public class Cliente
@@ -14,6 +16,13 @@ public class Cliente
     private String direccion;
     @Column(name="correo_electronico")
     private String correoElectronico;
+
+    //ahora debemos crear un atributo lista
+    //NOTA IMPORTANTE ES COLOCAR @OnetoMany antes del atributo lista
+    //de uno a muchos, un cliente tiene muchas compras
+    //@OnetoMany pregunta quien mantiene esta relacion, y es la variable cliente en la clase Compra
+    @OneToMany(mappedBy = "cliente")
+    private List<Compra> compras;
 
     //GETTERS AND SETTERS
 

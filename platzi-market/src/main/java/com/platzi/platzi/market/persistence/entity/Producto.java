@@ -2,6 +2,8 @@ package com.platzi.platzi.market.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="productos")
 public class Producto
@@ -20,6 +22,20 @@ public class Producto
     @Column(name="cantidad_stock")
     private Integer cantidadStock;
     private Boolean estado;
+
+    //Crearemos la variblae que relaciona la categoria con el producto
+    //Muchos productos tienen 1 categoria
+    @ManyToOne
+    //le indicamos que la columna id_categoria es lo que lo une y
+    // que no es insertable ni actualizable desde esta clase.Para hacerlo sera en la clase Categoria
+    @JoinColumn(name="id_categoria",insertable = false,updatable = false)
+    private Categoria categoria;
+    //Creamos la relacion con ComprasProducto
+    @OneToMany(mappedBy = "producto")
+    private List<ComprasProducto> compras;
+
+
+
 
     //GETTERS AND SETTERS
     public Integer getIdProducto() {
